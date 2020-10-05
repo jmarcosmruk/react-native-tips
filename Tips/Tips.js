@@ -193,13 +193,14 @@ export default class Tips extends PureComponent {
   }
 
   /**
-   * @componentWillReceiveProps
-   * @param {*} nextProps - Next properties of the PureComponent
+   * @componentDidUpdate
+   * @param {*} prevProps - Previous properties of the PureComponent
    */
-  componentWillReceiveProps(nextProps, nextState) {
-    if (nextProps.visible && !this.props.visible && !nextState.ready) {
+   componentDidUpdate(prevProps, prevState) {
+    
+    if (!prevProps.visible && this.props.visible && !prevState.ready) {
       this.updateComponentPosition(true)
-    } else if (!nextProps.visible && this.props.visible && nextState.ready) {
+    } else if (prevProps.visible && !this.props.visible && prevState.ready) {
       this.setState({
         ready: false
       })
